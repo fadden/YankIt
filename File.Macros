@@ -1,0 +1,117 @@
+ MACRO
+&lab longm
+&lab ANOP
+ rep #%00100000
+ longa on
+ MEND
+ MACRO
+&lab shortm
+&lab ANOP
+ sep #%00100000
+ longa off
+ MEND
+ MACRO
+&lab _WriteCString
+&lab ldx #$200C
+ jsl $E10000
+ MEND
+ MACRO
+&lab _ErrWriteCString
+&lab ldx #$210C
+ jsl $E10000
+ MEND
+ macro
+&l _beginsessiongs &p
+&l jsl $E100A8
+ dc i2'$201D'
+ dc i4'&p'
+ mend
+ macro
+&l _closegs &p
+&l jsl $E100A8
+ dc i2'$2014'
+ dc i4'&p'
+ mend
+ macro
+&l _creategs &p
+&l jsl $E100A8
+ dc i2'$2001'
+ dc i4'&p'
+ mend
+ macro
+&l _dcontrolgs &p
+&l jsl $E100A8
+ dc i2'$202E'
+ dc i4'&p'
+ mend
+ macro
+&l _destroygs &p
+&l jsl $E100A8
+ dc i2'$2002'
+ dc i4'&p'
+ mend
+ macro
+&l _dstatusgs &p
+&l jsl $E100A8
+ dc i2'$202D'
+ dc i4'&p'
+ mend
+ macro
+&l _endsessiongs &p
+&l jsl $E100A8
+ dc i2'$201E'
+ dc i4'&p'
+ mend
+ macro
+&l _expandpathgs &p
+&l jsl $E100A8
+ dc i2'$200E'
+ dc i4'&p'
+ mend
+ macro
+&l _getdevnumbergs &p
+&l jsl $E100A8
+ dc i2'$2020'
+ dc i4'&p'
+ mend
+ macro
+&l _getversiongs &p
+&l jsl $E100A8
+ dc i2'$202A'
+ dc i4'&p'
+ mend
+ macro
+&l _opengs &p
+&l jsl $E100A8
+ dc i2'$2010'
+ dc i4'&p'
+ mend
+ macro
+&l _readgs &p
+&l jsl $E100A8
+ dc i2'$2012'
+ dc i4'&p'
+ mend
+ macro
+&l _setfileinfogs &p
+&l jsl $E100A8
+ dc i2'$2005'
+ dc i4'&p'
+ mend
+ macro
+&l _setmarkgs &p
+&l jsl $E100A8
+ dc i2'$2016'
+ dc i4'&p'
+ mend
+ macro
+&l _writegs &p
+&l jsl $E100A8
+ dc i2'$2013'
+ dc i4'&p'
+ mend
+ MACRO
+&lab _TextReadBlock
+&lab ldx #$230C
+ jsl $E10000
+ MEND

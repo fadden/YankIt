@@ -1,0 +1,180 @@
+ macro
+&l init_wildcard &p
+&l ~setm
+ jsl $E100A8
+ dc i2'$0109'
+ dc i4'&p'
+ ~restm
+ mend
+ macro
+&l next_wildcard &p
+&l ~setm
+ jsl $E100A8
+ dc i2'$010A'
+ dc i4'&p'
+ ~restm
+ mend
+ macro
+&l stopgs &p
+&l ~setm
+ jsl $E100A8
+ dc i2'$0153'
+ dc i4'&p'
+ ~restm
+ mend
+ macro
+&l ~restm
+&l anop
+ aif (&~la+&~li)=2,.i
+ sep #32*(.not.&~la)+16*(.not.&~li)
+ aif &~la,.h
+ longa off
+.h
+ aif &~li,.i
+ longi off
+.i
+ mend
+ macro
+&l ~setm
+&l anop
+ aif c:&~la,.b
+ gblb &~la
+ gblb &~li
+.b
+&~la setb s:longa
+&~li setb s:longi
+ aif s:longa.and.s:longi,.a
+ rep #32*(.not.&~la)+16*(.not.&~li)
+ longa on
+ longi on
+.a
+ mend
+ MACRO
+&lab longm
+&lab ANOP
+ rep #%00100000
+ longa on
+ MEND
+ MACRO
+&lab longx
+&lab ANOP
+ rep #%00010000
+ longi on
+ MEND
+ MACRO
+&lab shortm
+&lab ANOP
+ sep #%00100000
+ longa off
+ MEND
+ MACRO
+&lab shortx
+&lab ANOP
+ sep #%00010000
+ longi off
+ MEND
+ MACRO
+&lab _Int2Dec
+&lab ldx #$260B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _Int2Hex
+&lab ldx #$220B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _WriteCString
+&lab ldx #$200C
+ jsl $E10000
+ MEND
+ MACRO
+&lab _IMStartUp
+&lab ldx #$020B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _IMShutDown
+&lab ldx #$030B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _Long2Dec
+&lab ldx #$270B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _LongDivide
+&lab ldx #$0D0B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _LongMul
+&lab ldx #$0C0B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _Multiply
+&lab ldx #$090B
+ jsl $E10000
+ MEND
+ MACRO
+&lab _TLStartUp
+&lab ldx #$0201
+ jsl $E10000
+ MEND
+ MACRO
+&lab _TLShutDown
+&lab ldx #$0301
+ jsl $E10000
+ MEND
+ MACRO
+&lab _MMStartUp
+&lab ldx #$0202
+ jsl $E10000
+ MEND
+ MACRO
+&lab _MMShutDown
+&lab ldx #$0302
+ jsl $E10000
+ MEND
+ MACRO
+&lab _MTStartUp
+&lab ldx #$0203
+ jsl $E10000
+ MEND
+ MACRO
+&lab _MTShutDown
+&lab ldx #$0303
+ jsl $E10000
+ MEND
+ MACRO
+&lab _TextStartUp
+&lab ldx #$020C
+ jsl $E10000
+ MEND
+ MACRO
+&lab _TextShutDown
+&lab ldx #$030C
+ jsl $E10000
+ MEND
+ MACRO
+&lab _ErrWriteCString
+&lab ldx #$210C
+ jsl $E10000
+ MEND
+ MACRO
+&lab _SetErrGlobals
+&lab ldx #$0B0C
+ jsl $E10000
+ MEND
+ MACRO
+&lab _SetInGlobals
+&lab ldx #$090C
+ jsl $E10000
+ MEND
+ MACRO
+&lab _SetOutGlobals
+&lab ldx #$0A0C
+ jsl $E10000
+ MEND
